@@ -1,6 +1,5 @@
 #ifndef DRV8302_H__
 #define DRV8302_H__
-#include "../ARM_HAL.h"
 #include "../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_gpio.h"
 #include "../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim.h"
 
@@ -109,7 +108,6 @@ class Drv8302Driver {
 
   void ApplyPhaseCW() {
     unsigned char hall_state = GetHallFB();
-    uint8_t duty_motor = duty_cycle_ * 1;
     switch (hall_state) {
       case 5:
         GPIO_pwm(ph_u_l_, GPIO_PIN_RESET);
@@ -172,7 +170,6 @@ class Drv8302Driver {
 
   void ApplyPhaseCCW() {
     unsigned char hall_state = GetHallFB();
-    uint8_t duty_motor = duty_cycle_ * 1;
     switch (hall_state) {
       case 4:
         HAL_GPIO_WritePin(ph_w_h_port_, ph_w_h_, GPIO_PIN_RESET);
